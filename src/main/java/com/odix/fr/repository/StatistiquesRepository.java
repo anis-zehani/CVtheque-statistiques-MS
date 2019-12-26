@@ -8,4 +8,5 @@ import com.odix.fr.model.Statistiques;
 @Repository
 public interface StatistiquesRepository extends JpaRepository<Statistiques, Long> {
 
+	Statistiques findOneById(Long id);
 }

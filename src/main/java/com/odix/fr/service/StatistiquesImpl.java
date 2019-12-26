@@ -3,7 +3,6 @@ package com.odix.fr.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -19,31 +18,38 @@ import com.odix.fr.webClients.TechnologieClient;
 @Service
 public class StatistiquesImpl implements StatistiquesService {
 	
-	@Autowired
+
 	CandidatClient candidatClient;
-	
-	@Autowired
 	PartenaireClient partenaireClient;
-	
-	@Autowired
 	ContactClient contactClient;
-	
-	@Autowired
 	OpportuniteClient opportuniteClient;
-	
-	@Autowired
 	TechnologieClient technologieClient;
-	
-	@Autowired
 	EntrepriseClient entrepriseClient;
 	
 	private final StatistiquesRepository statistiquesRepository;
 	
-	public StatistiquesImpl(StatistiquesRepository statistiquesRepository) {
+	public StatistiquesImpl
+	(
+			StatistiquesRepository statistiquesRepository, 
+			CandidatClient candidatClient,
+			PartenaireClient partenaireClient,
+			ContactClient contactClient,
+			OpportuniteClient opportuniteClient,
+			TechnologieClient technologieClient,
+			EntrepriseClient entrepriseClient
+	) 
+	{
 		super();
 		this.statistiquesRepository = statistiquesRepository;
-		Long totalContacts = contactClient.getCountContacts();
-		System.out.println(totalContacts);
+		this.candidatClient = candidatClient;
+		this.partenaireClient = partenaireClient;
+		this.contactClient = contactClient;
+		this.opportuniteClient = opportuniteClient;
+		this.technologieClient = technologieClient;
+		this.entrepriseClient = entrepriseClient;
+		
+		this.cronUpdate6ChiffresClesViaWebClients();
+
 	}
 
 
@@ -61,7 +67,7 @@ public class StatistiquesImpl implements StatistiquesService {
 		
 		// On met à jour si la ligne existe
 		if(statistiquesRepository.count() > 0) {
-			Statistiques statistiques = statistiquesRepository.getOne(0L);
+			Statistiques statistiques = statistiquesRepository.findOneById((long) 1);
 			statistiquesRepository.save(statistiques);
 		}
 		//On ajoute une ligne
@@ -80,23 +86,15 @@ public class StatistiquesImpl implements StatistiquesService {
 	//Retourne les 6 chiffres clés de base
 	@Override
 	public Map<String, Long> getStatistiques(){
+
+		Statistiques statistiques = statistiquesRepository.findOneById((long) 1);
 		
-		// Initialisations
-		Long totalCandidats = 0L;
-		Long totalOpportunites = 0L;
-		Long totalPartenaires = 0L;
-		Long totalContacts = 0L;
-		Long totalTechnologies = 0L;
-		Long totalEntreprises = 0L;
-		
-		Statistiques statistiques = statistiquesRepository.getOne(0L);
-		
-		totalCandidats = statistiques.getTotalCandidats();
-		totalOpportunites = statistiques.getTotalOpportunites();
-		totalPartenaires = statistiques.getTotalPartenaires();
-		totalContacts = statistiques.getTotalContacts();
-		totalTechnologies = statistiques.getTotalTechnologies();
-		totalEntreprises = statistiques.getTotalEntreprises();
+		Long totalCandidats = statistiques.getTotalCandidats();
+		Long totalOpportunites = statistiques.getTotalOpportunites();
+		Long totalPartenaires = statistiques.getTotalPartenaires();
+		Long totalContacts = statistiques.getTotalContacts();
+		Long totalTechnologies = statistiques.getTotalTechnologies();
+		Long totalEntreprises = statistiques.getTotalEntreprises();
 		
 		Map<String, Long> map = new HashMap<>();
 		

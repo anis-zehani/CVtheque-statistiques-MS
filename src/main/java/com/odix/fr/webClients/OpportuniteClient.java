@@ -1,12 +1,11 @@
 package com.odix.fr.webClients;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(value = "opportunites-MS")
+@FeignClient("opportunites-MS")
 public interface OpportuniteClient {
 
-	@RequestMapping(method = RequestMethod.GET, value = "/api/opportunite/getCountOpportunites")
+	@GetMapping("/api/opportunite/getCountOpportunites")
 	Long getCountOpportunites();
 }

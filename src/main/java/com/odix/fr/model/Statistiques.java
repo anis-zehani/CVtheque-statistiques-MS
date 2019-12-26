@@ -20,25 +20,25 @@ public class Statistiques implements Serializable {
 	private static final long serialVersionUID = -7411885250319618267L;
 	
 	@Id
-	private @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	public @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
 	@Column
-	private Long totalCandidats;
+	public Long totalCandidats;
 	
 	@Column
-	private Long totalOpportunites;
+	public Long totalOpportunites;
 	
 	@Column
-	private Long totalPartenaires;
+	public Long totalPartenaires;
 	
 	@Column
-	private Long totalContacts;
+	public Long totalContacts;
 	
 	@Column
-	private Long totalTechnologies;
+	public Long totalTechnologies;
 	
 	@Column
-	private Long totalEntreprises;
+	public Long totalEntreprises;
 
 	public Long getId() {
 		return id;
