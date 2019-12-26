@@ -42,6 +42,8 @@ public class StatistiquesImpl implements StatistiquesService {
 	public StatistiquesImpl(StatistiquesRepository statistiquesRepository) {
 		super();
 		this.statistiquesRepository = statistiquesRepository;
+		Long totalContacts = contactClient.getCountContacts();
+		System.out.println(totalContacts);
 	}
 
 
