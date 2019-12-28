@@ -47,9 +47,6 @@ public class StatistiquesImpl implements StatistiquesService {
 		this.opportuniteClient = opportuniteClient;
 		this.technologieClient = technologieClient;
 		this.entrepriseClient = entrepriseClient;
-		
-		this.cronUpdate6ChiffresClesViaWebClients();
-
 	}
 
 
