@@ -18,10 +18,12 @@ spec:
     spec:
       containers:
       - name: statistiques-container
-        image: registry.gitlab.com/gitlabodix/statistiques-ms
+        image: registry.gitlab.com/gitlabodix/cvtheque-statistiques-ms-prod
         imagePullPolicy: Always
         ports:
         - containerPort: 8006
+      imagePullSecrets:
+      - name: gitlab-secrets
 ---
 apiVersion: v1
 kind: Service
