@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   name: statistiques-deployment
   labels:
-    app: statistiques-MS
+    app: statistiques
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: statistiques-MS
+      app: statistiques
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: statistiques-MS
+        app: statistiques
     spec:
       containers:
       - name: statistiques-container
@@ -29,10 +29,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: statistiques-service
+  name: statistiques-ms
 spec:
   selector:
-    app: statistiques-MS
+    app: statistiques
   ports:
     - port: 8006
       targetPort: 8006
