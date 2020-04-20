@@ -1,3 +1,17 @@
+#################### Secrets ####################
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitlab-secrets-statistiques-ms
+type: Opaque
+data:
+  docker-server: cmVnaXN0cnkuZ2l0bGFiLmNvbS9naXRsYWJvZGl4L2N2dGhlcXVlLXN0YXRpc3RpcXVlcy1tcy1wcm9k
+  docker-username: R2l0TGFiT2RpeAo=
+  docker-password: Z2RmZmcrNWRmZ2Y4OG5wbzI0eHdtNDFhCg==
+  docker-email: YXphaGVuaUBzbWFydGdyYXBoZS5jb20K
+#################### Deployment ####################
+---
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
@@ -5,7 +19,7 @@ metadata:
   labels:
     app: statistiques
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: statistiques
@@ -20,11 +34,12 @@ spec:
       - name: statistiques-container
         image: registry.gitlab.com/gitlabodix/cvtheque-statistiques-ms-prod
         args: ["--spring.profiles.active=prod"]
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
         - containerPort: 8006
       imagePullSecrets:
       - name: gitlab-secrets-statistiques-ms
+#################### Service ####################
 ---
 apiVersion: v1
 kind: Service
@@ -36,4 +51,5 @@ spec:
   ports:
     - port: 8006
       targetPort: 8006
+
 
