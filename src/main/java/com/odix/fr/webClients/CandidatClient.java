@@ -1,11 +1,21 @@
 package com.odix.fr.webClients;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient("gateway-ms")
+@FeignClient(name = "gateway-ms", fallback = CandidatClient.CandidatClientFallback.class)
 public interface CandidatClient {
 
 	@GetMapping("/api/gateway/candidat/getCountCandidats")
 	Long getCountCandidats();
+	
+	@Component
+	public static class CandidatClientFallback {
+
+		public Long getCountCandidats() {
+			System.out.println("getCountCandidats");
+			return null;
+		}
+	}
 }
