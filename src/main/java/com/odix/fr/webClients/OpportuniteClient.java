@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
 //@FeignClient(name = "opportunites-ms:8002", fallback = OpportuniteClient.OpportuniteClientFallback.class)
-@FeignClient("opportunites-ms")
+@FeignClient("opportunites-ms:8002")
 public interface OpportuniteClient {
 
 	@GetMapping("/api/opportunite/getCountOpportunites")

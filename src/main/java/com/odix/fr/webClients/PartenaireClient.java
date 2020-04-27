@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
 //@FeignClient(name = "gateway-ms:8080", fallback = PartenaireClient.PartenaireClientFallback.class)
-@FeignClient("gateway-ms")
+@FeignClient("gateway-ms:8080")
 public interface PartenaireClient {
 
 	@GetMapping("/api/gateway/partenaire/getCountPartenaires")
