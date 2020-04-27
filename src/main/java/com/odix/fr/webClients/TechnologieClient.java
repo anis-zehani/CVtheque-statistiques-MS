@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(name = "backend-ms", fallback = TechnologieClient.TechnologieClientFallback.class)
+@FeignClient(name = "backend-ms:8001", fallback = TechnologieClient.TechnologieClientFallback.class)
 public interface TechnologieClient {
 
 	@GetMapping("/api/technologie/getCountTechnologies")

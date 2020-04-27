@@ -95,4 +95,12 @@ public class Statistiques implements Serializable {
 	public void setTotalEntreprises(Long totalEntreprises) {
 		this.totalEntreprises = totalEntreprises;
 	}
+
+	@Override
+	public String toString() {
+		return "Statistiques [id=" + id + ", totalCandidats=" + totalCandidats + ", totalOpportunites="
+				+ totalOpportunites + ", totalPartenaires=" + totalPartenaires + ", totalContacts=" + totalContacts
+				+ ", totalTechnologies=" + totalTechnologies + ", totalEntreprises=" + totalEntreprises + "]";
+	}
+
 }

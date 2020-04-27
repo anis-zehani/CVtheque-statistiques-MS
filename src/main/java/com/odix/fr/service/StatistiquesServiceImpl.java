@@ -18,25 +18,24 @@ import com.odix.fr.webClients.TechnologieClient;
 @Service
 public class StatistiquesServiceImpl implements StatistiquesService {
 	
-
-	CandidatClient candidatClient;
-	PartenaireClient partenaireClient;
-	ContactClient contactClient;
-	OpportuniteClient opportuniteClient;
-	TechnologieClient technologieClient;
-	EntrepriseClient entrepriseClient;
+		CandidatClient candidatClient;
+		PartenaireClient partenaireClient;
+		ContactClient contactClient;
+		OpportuniteClient opportuniteClient;
+		TechnologieClient technologieClient;
+		EntrepriseClient entrepriseClient;
 	
 	private final StatistiquesRepository statistiquesRepository;
 	
 	public StatistiquesServiceImpl
 	(
-			StatistiquesRepository statistiquesRepository, 
-			CandidatClient candidatClient,
-			PartenaireClient partenaireClient,
-			ContactClient contactClient,
-			OpportuniteClient opportuniteClient,
-			TechnologieClient technologieClient,
-			EntrepriseClient entrepriseClient
+		StatistiquesRepository statistiquesRepository, 
+		CandidatClient candidatClient,
+		PartenaireClient partenaireClient,
+		ContactClient contactClient,
+		OpportuniteClient opportuniteClient,
+		TechnologieClient technologieClient,
+		EntrepriseClient entrepriseClient
 	) 
 	{
 		super();
@@ -62,7 +61,8 @@ public class StatistiquesServiceImpl implements StatistiquesService {
 		Long totalTechnologies = (long) 0;
 		Long totalEntreprises = (long) 0;
 		
-		try {
+		try 
+		{
 			// On récupère les statistiques via les client Feign
 			totalCandidats = candidatClient.getCountCandidats();
 			totalPartenaires = partenaireClient.getCountPartenaires();
@@ -70,7 +70,8 @@ public class StatistiquesServiceImpl implements StatistiquesService {
 			totalOpportunites = opportuniteClient.getCountOpportunites();
 			totalTechnologies = technologieClient.getCountTechnologies();
 			totalEntreprises = entrepriseClient.getCountEntreprises();
-		}catch(Exception e) {
+		}
+		catch(Exception e) {
 			System.out.println(e);
 		}
 		
@@ -84,6 +85,7 @@ public class StatistiquesServiceImpl implements StatistiquesService {
 			statistiques.setTotalTechnologies(totalTechnologies);
 			statistiques.setTotalEntreprises(totalEntreprises);
 			statistiquesRepository.save(statistiques);
+			System.out.println(statistiques.toString());
 		}
 		//On ajoute une ligne Statistiques sinon
 		else {
@@ -95,7 +97,10 @@ public class StatistiquesServiceImpl implements StatistiquesService {
 			statistiques.setTotalTechnologies(totalTechnologies);
 			statistiques.setTotalEntreprises(totalEntreprises);
 			statistiquesRepository.save(statistiques);
+			System.out.println(statistiques.toString());
 		}
+		
+		
 	}
 	
 	//Retourne les 6 chiffres clés de base
