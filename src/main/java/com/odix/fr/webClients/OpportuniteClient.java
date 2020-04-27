@@ -4,8 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
-//@FeignClient(name = "opportunites-ms:8002", fallback = OpportuniteClient.OpportuniteClientFallback.class)
-@FeignClient("opportunites-ms:8002")
+@FeignClient(name = "opportunites-ms:8002", fallback = OpportuniteClient.OpportuniteClientFallback.class)
 public interface OpportuniteClient {
 
 	@GetMapping("/api/opportunite/getCountOpportunites")

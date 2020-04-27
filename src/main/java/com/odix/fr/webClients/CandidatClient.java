@@ -4,8 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
-//@FeignClient(name = "gateway-ms:8080", fallback = CandidatClient.CandidatClientFallback.class)
-@FeignClient("gateway-ms:8080")
+@FeignClient(name = "gateway-ms:8080", fallback = CandidatClient.CandidatClientFallback.class)
 public interface CandidatClient {
 
 	@GetMapping("/api/gateway/candidat/getCountCandidats")

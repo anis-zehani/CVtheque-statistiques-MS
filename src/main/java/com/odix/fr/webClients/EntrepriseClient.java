@@ -4,8 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
-//@FeignClient(name = "backend-ms:8001", fallback = EntrepriseClient.EntrepriseClientFallback.class)
-@FeignClient("backend-ms:8001")
+@FeignClient(name = "backend-ms:8001", fallback = EntrepriseClient.EntrepriseClientFallback.class)
 public interface EntrepriseClient {
 
 	@GetMapping("/api/entreprise/getCountEntreprises")
