@@ -1,10 +1,12 @@
 package com.odix.fr.webClients;
 
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(name = "opportunites-ms:8002", fallback = OpportuniteClient.OpportuniteClientFallback.class)
+//@FeignClient(name = "opportunites-ms:8002", fallback = OpportuniteClient.OpportuniteClientFallback.class)
+@RibbonClient(name = "opportunites-ms")
 public interface OpportuniteClient {
 
 	@GetMapping("/api/opportunite/getCountOpportunites")
