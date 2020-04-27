@@ -50,8 +50,8 @@ public class StatistiquesServiceImpl implements StatistiquesService {
 	}
 
 
-	// CRON ici qui fait appel aux 6 Web Clients Feign puis UPDATE les 6 chiffres clés dans la BDD : chaque 15 minutes
-	@Scheduled(fixedRate = 900000)
+	// CRON ici qui fait appel aux 6 Web Clients Feign puis UPDATE les 6 chiffres clés dans la BDD : chaque 5 minutes
+	@Scheduled(fixedRate = 300000)
 	public void cronUpdate6ChiffresClesViaWebClients() {
 		
 		//Initialiser à zéro pour éviter le nullPointer
