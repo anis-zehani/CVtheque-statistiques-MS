@@ -15,7 +15,7 @@ public interface CandidatClient {
 
 		public Long getCountCandidats() {
 			System.out.println("getCountCandidats");
-			return null;
+			return (long) 0;
 		}
 	}
 }

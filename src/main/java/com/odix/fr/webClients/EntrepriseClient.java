@@ -15,7 +15,7 @@ public interface EntrepriseClient {
 
 		public Long getCountEntreprises() {
 			System.out.println("getCountEntreprises");
-			return null;
+			return (long) 0;
 		}
 	}
 }

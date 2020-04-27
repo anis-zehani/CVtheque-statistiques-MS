@@ -15,7 +15,7 @@ public interface OpportuniteClient {
 
 		public Long getCountOpportunites() {
 			System.out.println("getCountOpportunites");
-			return null;
+			return (long) 0;
 		}
 	}
 }

@@ -15,7 +15,7 @@ public interface ContactClient {
 
 		public Long getCountContacts() {
 			System.out.println("getCountContacts");
-			return null;
+			return (long) 0;
 		}
 	}
 }

@@ -15,7 +15,7 @@ public interface TechnologieClient {
 
 		public Long getCountTechnologies() {
 			System.out.println("getCountTechnologies");
-			return null;
+			return (long) 0;
 		}
 	}
 }

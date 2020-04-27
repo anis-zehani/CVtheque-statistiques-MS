@@ -16,7 +16,7 @@ import com.odix.fr.webClients.PartenaireClient;
 import com.odix.fr.webClients.TechnologieClient;
 
 @Service
-public class StatistiquesImpl implements StatistiquesService {
+public class StatistiquesServiceImpl implements StatistiquesService {
 	
 
 	CandidatClient candidatClient;
@@ -28,7 +28,7 @@ public class StatistiquesImpl implements StatistiquesService {
 	
 	private final StatistiquesRepository statistiquesRepository;
 	
-	public StatistiquesImpl
+	public StatistiquesServiceImpl
 	(
 			StatistiquesRepository statistiquesRepository, 
 			CandidatClient candidatClient,
@@ -54,20 +54,38 @@ public class StatistiquesImpl implements StatistiquesService {
 	@Scheduled(fixedRate = 900000)
 	public void cronUpdate6ChiffresClesViaWebClients() {
 		
-		// On récupère les statistiques via les client Feign
-		Long totalCandidats = candidatClient.getCountCandidats();
-		Long totalPartenaires = partenaireClient.getCountPartenaires();
-		Long totalContacts = contactClient.getCountContacts();
-		Long totalOpportunites = opportuniteClient.getCountOpportunites();
-		Long totalTechnologies = technologieClient.getCountTechnologies();
-		Long totalEntreprises = entrepriseClient.getCountEntreprises();
+		//Initialiser à zéro pour éviter le nullPointer
+		Long totalCandidats = (long) 0;
+		Long totalPartenaires = (long) 0;
+		Long totalContacts = (long) 0;
+		Long totalOpportunites = (long) 0;
+		Long totalTechnologies = (long) 0;
+		Long totalEntreprises = (long) 0;
 		
-		// On met à jour si la ligne existe
+		try {
+			// On récupère les statistiques via les client Feign
+			totalCandidats = candidatClient.getCountCandidats();
+			totalPartenaires = partenaireClient.getCountPartenaires();
+			totalContacts = contactClient.getCountContacts();
+			totalOpportunites = opportuniteClient.getCountOpportunites();
+			totalTechnologies = technologieClient.getCountTechnologies();
+			totalEntreprises = entrepriseClient.getCountEntreprises();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		// On met à jour Statistiques si la ligne existe
 		if(statistiquesRepository.count() > 0) {
 			Statistiques statistiques = statistiquesRepository.findOneById((long) 1);
+			statistiques.setTotalCandidats(totalCandidats);
+			statistiques.setTotalPartenaires(totalPartenaires);
+			statistiques.setTotalContacts(totalContacts);
+			statistiques.setTotalOpportunites(totalOpportunites);
+			statistiques.setTotalTechnologies(totalTechnologies);
+			statistiques.setTotalEntreprises(totalEntreprises);
 			statistiquesRepository.save(statistiques);
 		}
-		//On ajoute une ligne
+		//On ajoute une ligne Statistiques sinon
 		else {
 			Statistiques statistiques = new Statistiques();
 			statistiques.setTotalCandidats(totalCandidats);

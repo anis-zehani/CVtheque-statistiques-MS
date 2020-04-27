@@ -15,7 +15,7 @@ public interface PartenaireClient {
 
 		public Long getCountPartenaires() {
 			System.out.println("getCountPartenaires");
-			return null;
+			return (long) 0;
 		}
 	}
 }
